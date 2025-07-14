@@ -16,19 +16,19 @@ body.dark-mode {
   --footer-text: #ffffff;
 }
 
+/* 1) Evitamos cualquier scroll en la app */
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  height: 100vh;      /* ocupamos toda la ventana */
+  overflow: hidden;   /* nada de scroll en el body */
   display: flex;
   flex-direction: column;
-  /* Eliminas height fija y overflow */
 }
 
+/* 2) El <main> tampoco hace scroll */
 main {
   flex: 1;
-  overflow: hidden;
+  overflow: hidden;   /* elimina scroll en main */
   display: flex;
   flex-direction: column;
 }
@@ -159,30 +159,44 @@ main {
 }
 
 /* Iframe scrollable, con menú superior oculto */
+/* 3) El wrapper sólo sirve para contener, sin scroll */
 .iframe-wrapper {
-  flex: 100;
-  overflow-y: auto;
   position: relative;
+  flex: 1;
+  overflow: hidden;   /* recorta TODO lo que salga fuera */
 }
 
-iframe {
+.iframe-wrapper iframe {
+  position: absolute;
+  top: -80px;        /* ajusta este valor a la altura (header + menú) que quieras ocultar */
+  left: 0;
   width: 100%;
-  height: calc(100% + 150px); /* le damos espacio extra */
+  height: calc(100% + 250px + 106px);
+                      /* 100% + (lo que ocultas arriba) + (lo que ocultas abajo) */
   border: none;
-  margin-top: -85px; /* oculta el header externo */
-  margin-bottom: -120px; /* oculta el footer externo */
-  pointer-events: auto;
-
-   flex: 1;
-  overflow-y: auto;
-  position: relative;
+  /* El scroll interno seguirá funcionando: el usuario hará scroll DENTRO del frame */
 }
+
+/* 4) El iframe es quien hará scroll interno,
+      y su altura queda ajustada al 100% del wrapper */
+iframe {
+  padding-top: -280px;
+  width: 100%;
+  height: 100%;       /* ocupa exactamente todo el .iframe-wrapper */
+  min-height: 800px;  /* tú controlas este valor inline si quieres */
+  
+  border: none;
+  overflow-y: auto;   /* sólo scroll vertical DENTRO del iframe */
+  position: relative;
+  margin: 0;          /* retiramos márgenes negativos */
+}
+
 
 /* Footer fijo al fondo */
 footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   position: sticky;
   z-index: 10;
@@ -336,15 +350,27 @@ footer {
   display: none;
 }
 
-.iframe-overlay {
+/* 5) Overlays para ocultar header y footer del embed */
+.iframe-overlay.top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2000px;      /* header + menú embebido */
+  background: var(--bg-color);
+  pointer-events: none;
+  z-index: -2;
+}
+
+.iframe-overlay.bottom {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 106px; /* altura del footer de FewFeeD */
+  height: 106px;             /* alto del footer embebido */
   background: var(--bg-color);
-  z-index: 2;
   pointer-events: none;
+  z-index: 2;
 }
 
 /* Boton Facebook Login */
