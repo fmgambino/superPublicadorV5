@@ -64,6 +64,52 @@
   <div class="iframe-overlay"></div> <!-- Esto tapa el footer embebido -->
 </div>
 
+<!-- Popup de descarga de extensión -->
+<div id="extensionModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeExtensionModal()">&times;</span>
+    <div style="text-align: center">
+      <h2>Instala nuestra extensión para Google Chrome</h2>
+      <p>Para continuar, por favor descarga e instala nuestra extensión en tu navegador.</p>
+
+      <!-- Botón para descargar la extensión -->
+      <a href="URL_DE_TU_EXTENSION.zip" class="btn-facebook" download>
+        Descargar Extensión Chrome
+      </a>
+
+      <!-- Botón de voz -->
+      <button onclick="leerInstrucciones()" class="btn-voice">
+        🔊 Escuchar instrucciones
+      </button>
+
+      <!-- Video tutorial -->
+      <div style="margin-top: 20px">
+        <video controls width="100%" style="max-width: 400px">
+          <source src="TUTORIAL.mp4" type="video/mp4" />
+          Tu navegador no soporta video.
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Popup de login Facebook (reutilizado) -->
+<div id="facebookModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close" onclick="closeFacebookModal()">&times;</span>
+    <div style="text-align: center">
+      <p style="font-size: 36px; color: red;">&#9888;</p>
+      <h2>Debes iniciar sesión en Facebook</h2>
+      <p>
+        Para usar esta herramienta, primero debes iniciar sesión en Facebook.
+        Si ya lo hiciste, puedes recargar la página.
+      </p>
+      <button class="btn-facebook" onclick="openFacebookLogin()">Ir a Facebook</button>
+    </div>
+  </div>
+</div>
+
+
 <div id="facebookModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeFacebookModal()">&times;</span>

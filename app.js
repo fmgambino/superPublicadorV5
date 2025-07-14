@@ -74,30 +74,69 @@ function closePlansModal(event) {
   }
 }
 
+// Cierra banner de instalación PWA
 function dismissInstall() {
-  document.getElementById("installBanner").classList.add("hidden");
+  document.getElementById("installBanner")?.classList.add("hidden");
   localStorage.setItem("dismissedInstall", "true");
 }
 
+// Abre el login de Facebook en nueva ventana
 function openFacebookLogin() {
-  window.open("https://www.facebook.com/login", "_blank", "width=500,height=600");
+  const win = window.open("https://www.facebook.com/login", "_blank", "width=500,height=600");
+
+  // Monitorea si se cierra la ventana para marcar login como hecho
+  const checkLogin = setInterval(() => {
+    if (win.closed) {
+      clearInterval(checkLogin);
+      localStorage.setItem("facebookLoggedIn", "true");
+      closeFacebookModal(); // Cierra el popup
+    }
+  }, 500);
 }
 
+// Mostrar modal de login de Facebook
 function showFacebookModal() {
-  document.getElementById("facebookModal").classList.remove("hidden");
+  if (!localStorage.getItem("facebookLoggedIn")) {
+    document.getElementById("facebookModal")?.classList.remove("hidden");
+  }
 }
 
+// Cerrar modal manualmente
 function closeFacebookModal() {
-  document.getElementById("facebookModal").classList.add("hidden");
+  document.getElementById("facebookModal")?.classList.add("hidden");
 }
 
-// Opcional: mostrarlo automáticamente cuando quieras
-// showFacebookModal();
+// Cerrar modal de extensión → luego mostrar login si no está logueado
+function closeExtensionModal() {
+  document.getElementById("extensionModal")?.classList.add("hidden");
+  localStorage.setItem("extensionInstalled", "true");
 
+  setTimeout(() => {
+    showFacebookModal();
+  }, 800);
+}
+
+// Reproducir voz con instrucciones de instalación de la extensión
+function leerInstrucciones() {
+  const texto = `Para instalar la extensión, descargue el archivo ZIP, descomprímalo, abra Google Chrome, escriba chrome://extensions, active el modo desarrollador y haga clic en Cargar descomprimida. Seleccione la carpeta descomprimida.`;
+  const voz = new SpeechSynthesisUtterance(texto);
+  voz.lang = "es-ES";
+  voz.rate = 1;
+  window.speechSynthesis.speak(voz);
+}
+
+// Mostrar popup al iniciar
 window.addEventListener("load", () => {
   setTimeout(() => {
-    showFacebookModal(); // Puedes ajustar el gatillo según el estado del iframe
-  }, 1500);
+    const extensionOK = localStorage.getItem("extensionInstalled");
+    const fbOK = localStorage.getItem("facebookLoggedIn");
+
+    if (!extensionOK) {
+      document.getElementById("extensionModal")?.classList.remove("hidden");
+    } else if (!fbOK) {
+      showFacebookModal();
+    }
+  }, 800);
 });
 
 
