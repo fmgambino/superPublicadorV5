@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" href="./images/favicon" type="image/png" />
+  <title>Super-Publicador Facebook V5.0 by Electrónica Gambino</title>
+</head>
+<body class="dark-mode">
+
+  <!-- Pantalla de carga -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Popup instalación PWA -->
+  <div id="installBanner" class="install-popup hidden">
+    <p id="installMessage">¿Deseas instalar esta app en tu escritorio?</p>
+    <button id="installBtn">Instalar</button>
+    <button onclick="dismissInstall()">Cancelar</button>
+  </div>
+
+  <header class="navbar">
+    <img id="logo" data-logo data-logo-light="images/superpublicador_ligth.png" data-logo-dark="images/superpublicador_black.png" src="images/logo-light.png" alt="Logo">
+
+
+    <!-- Menú visible en escritorio -->
+    <ul class="desktop-menu">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#planes">Planes</a></li>
+    </ul>
+
+    <div class="controls">
+      <button id="langToggle" class="icon-button tooltip">
+        🌐
+        <span class="tooltiptext" id="langTooltip">Idioma: Español</span>
+      </button>
+      <button id="themeToggle" class="icon-button" title="Modo claro/oscuro">
+        ☀️
+      </button>
+    </div>
+
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <!-- Menú mobile -->
+  <nav id="menu" class="menu">
+    <a href="#nosotros">Nosotros</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#planes">Planes</a>
+  </nav>
+
+  
+  <div class="iframe-wrapper">
+  <iframe
+    id="toolFrame"
+    src="https://v2.fewfeed.com/tool/auto-post-fb-group"
+    frameborder="0"
+  ></iframe>
+  <div class="iframe-overlay"></div> <!-- Esto tapa el footer embebido -->
+</div>
+
+
+  <footer>
+    <p id="welcomeMessage">Bienvenido a la herramienta automática de publicación.</p>
+    Powered by <a href="https://electronicagambino.com" target="_blank">Electrónica Gambino</a>
+  </footer>
+
+  <!-- Botones flotantes -->
+  <button class="floating-button subscribe-button" onclick="openPlansModal()">Suscribirse</button>
+  <a href="https://wa.me/+5491128715389" target="_blank" class="floating-button whatsapp-button">💬</a>
+
+  <!-- Modal de planes -->
+  <div id="plansModal" class="modal hidden" onclick="closePlansModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close" onclick="closePlansModal()">&times;</span>
+      <h2>Elige tu plan</h2>
+      <div class="plan">
+        <h3>Plan Bronce - $7,99/mes</h3>
+        <p>30 días de AutoPostEG + 30 días de "Wasapbot"</p>
+        <a href="https://tusitio.com/checkout-bronce" class="btn-plan" target="_blank">Adquirir</a>
+      </div>
+      <div class="plan">
+        <h3>Plan Platinum - $19,99/mes</h3>
+        <p>90 días de AutoPostEG + 90 días de "Wasapbot"</p>
+        <a href="https://tusitio.com/checkout-platinum" class="btn-plan" target="_blank">Adquirir</a>
+      </div>
+      <div class="plan">
+        <h3>Plan Oro - $49,99/mes</h3>
+        <p>365 días de AutoPostEG + 365 días de "Wasapbot"</p>
+        <a href="https://tusitio.com/checkout-oro" class="btn-plan" target="_blank">Adquirir</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
