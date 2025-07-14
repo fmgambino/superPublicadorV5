@@ -64,6 +64,23 @@
   <div class="iframe-overlay"></div> <!-- Esto tapa el footer embebido -->
 </div>
 
+<div id="facebookModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeFacebookModal()">&times;</span>
+    <div style="text-align: center">
+      <p style="font-size: 36px; color: red;">&#9888;</p>
+      <h2>Debes iniciar sesión en Facebook</h2>
+      <p>
+        Para usar esta herramienta, primero debes iniciar sesión en Facebook.
+        Si ya lo hiciste, puedes recargar la página.
+      </p>
+      <button class="btn-facebook" onclick="openFacebookLogin()">Ir a Facebook</button>
+    </div>
+  </div>
+</div>
+
+
+
 
   <footer>
     <p id="welcomeMessage">Bienvenido a la herramienta automática de publicación.</p>

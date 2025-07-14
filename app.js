@@ -79,6 +79,28 @@ function dismissInstall() {
   localStorage.setItem("dismissedInstall", "true");
 }
 
+function openFacebookLogin() {
+  window.open("https://www.facebook.com/login", "_blank", "width=500,height=600");
+}
+
+function showFacebookModal() {
+  document.getElementById("facebookModal").classList.remove("hidden");
+}
+
+function closeFacebookModal() {
+  document.getElementById("facebookModal").classList.add("hidden");
+}
+
+// Opcional: mostrarlo automáticamente cuando quieras
+// showFacebookModal();
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    showFacebookModal(); // Puedes ajustar el gatillo según el estado del iframe
+  }, 1500);
+});
+
+
 window.addEventListener("DOMContentLoaded", () => {
   // Hide loader after brief display
   setTimeout(() => {
