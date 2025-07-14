@@ -23,8 +23,7 @@ body {
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+  /* Eliminas height fija y overflow */
 }
 
 main {
@@ -161,27 +160,31 @@ main {
 
 /* Iframe scrollable, con menú superior oculto */
 .iframe-wrapper {
-  flex: 1;
+  flex: 100;
   overflow-y: auto;
   position: relative;
 }
 
 iframe {
   width: 100%;
-  height: calc(100% + 160px); /* le damos espacio extra */
+  height: calc(100% + 150px); /* le damos espacio extra */
   border: none;
-  margin-top: -80px; /* oculta el header externo */
-  margin-bottom: -460px; /* oculta el footer externo */
+  margin-top: -85px; /* oculta el header externo */
+  margin-bottom: -120px; /* oculta el footer externo */
   pointer-events: auto;
+
+   flex: 1;
+  overflow-y: auto;
+  position: relative;
 }
 
 /* Footer fijo al fondo */
 footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
-  padding: 12px;
+  padding: 20px;
   text-align: center;
-  position: relative;
+  position: sticky;
   z-index: 10;
 }
 
@@ -205,6 +208,7 @@ footer {
 
 .whatsapp-button {
   bottom: 30px;
+  background-color: #138f03;
 }
 
 /* Modal */
@@ -337,7 +341,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px; /* altura del footer de FewFeeD */
+  height: 106px; /* altura del footer de FewFeeD */
   background: var(--bg-color);
   z-index: 2;
   pointer-events: none;
@@ -376,3 +380,56 @@ footer {
 .btn-voice:hover {
   background: #333;
 }
+
+.btn-tutorial {
+  background-color: #d32f2f; /* rojo fuerte */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px solid #b71c1c;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-tutorial:hover {
+  background-color: #b71c1c;
+  transform: scale(1.05);
+}
+
+/*Tutoriales*/
+/* Tutorial Modal */
+.tutorial-container {
+  max-width: 1000px;
+  overflow-x: auto;
+}
+
+.tutorial-videos {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.tutorial-item {
+  min-width: 300px;
+  max-width: 400px;
+  background: var(--footer-bg);
+  border-radius: 10px;
+  padding: 10px;
+  flex: 0 0 auto;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(0,0,0,0.2);
+}
+
+.tutorial-item h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.tutorial-item video {
+  width: 100%;
+  border-radius: 8px;
+}
+1

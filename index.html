@@ -32,6 +32,8 @@
       <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#contacto">Contacto</a></li>
       <li><a href="#planes">Planes</a></li>
+      <li><a href="#" id="linkTutoriales" class="btn-tutorial">Tutoriales</a></li>
+
     </ul>
 
     <div class="controls">
@@ -52,15 +54,21 @@
     <a href="#nosotros">Nosotros</a>
     <a href="#contacto">Contacto</a>
     <a href="#planes">Planes</a>
+    <a href="#" id="linkTutorialesMobile" class="btn-tutorial">Tutoriales</a>
+
+
+
   </nav>
 
   
   <div class="iframe-wrapper">
   <iframe
-    id="toolFrame"
-    src="https://v2.fewfeed.com/tool/auto-post-fb-group"
-    frameborder="0"
-  ></iframe>
+  id="toolFrame"
+  src="https://v2.fewfeed.com/tool/auto-post-fb-group"
+  frameborder="0"
+  style="min-height: 800px;" <!-- Ajusta esto a tu gusto -->
+></iframe>
+
   <div class="iframe-overlay"></div> <!-- Esto tapa el footer embebido -->
 </div>
 
@@ -73,7 +81,7 @@
       <p>Para continuar, por favor descarga e instala nuestra extensión en tu navegador.</p>
 
       <!-- Botón para descargar la extensión -->
-      <a href="URL_DE_TU_EXTENSION.zip" class="btn-facebook" download>
+      <a href="./assets/files/superPublicadorEG.zip" class="btn-facebook" download>
         Descargar Extensión Chrome
       </a>
 
@@ -85,7 +93,7 @@
       <!-- Video tutorial -->
       <div style="margin-top: 20px">
         <video controls width="100%" style="max-width: 400px">
-          <source src="TUTORIAL.mp4" type="video/mp4" />
+          <source src="https://www.youtube.com/watch?v=Z3XfiatWazI" type="video/mp4" />
           Tu navegador no soporta video.
         </video>
       </div>
@@ -109,6 +117,45 @@
   </div>
 </div>
 
+<!-- Modal Tutoriales -->
+<div id="tutorialModal" class="modal hidden">
+  <div class="modal-content tutorial-container">
+    <span class="close" onclick="closeTutorialModal()">&times;</span>
+    <h2 style="text-align: center;">🎓 Guías paso a paso</h2>
+    <div class="tutorial-videos">
+      <div class="tutorial-item">
+        <h3>📌 Tutorial Nº1: Cómo Publicar en tus Grupos de Facebook</h3>
+        <video controls>
+          <source src="./assets/videos/tutorial01_ComoPublicarAutoGrupos.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="tutorial-item">
+        <h3>🛠️ Tutorial Nº2: Cómo responder automáticamente a los comentarios</h3>
+        <video controls>
+          <source src="./assets/videos/tutorial02_ComoResponderComentarios.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <!-- <div class="tutorial-item">
+        <h3>⚙️ Tutorial Nº3: Usar el AutoPost</h3>
+        <video controls>
+          <source src="videos/tutorial3.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="tutorial-item">
+        <h3>⏱️ Tutorial Nº4: Programar Publicaciones</h3>
+        <video controls>
+          <source src="videos/tutorial4.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="tutorial-item">
+        <h3>🔄 Tutorial Nº5: Actualizar tu Cuenta</h3>
+        <video controls>
+          <source src="videos/tutorial5.mp4" type="video/mp4" />
+        </video>
+      </div> -->
+    </div>
+  </div>
+</div>
 
 
 

@@ -145,6 +145,27 @@ function leerInstrucciones() {
   window.speechSynthesis.speak(voz);
 }
 
+function openTutorialModal() {
+  document.getElementById("tutorialModal")?.classList.remove("hidden");
+}
+
+function closeTutorialModal() {
+  document.getElementById("tutorialModal")?.classList.add("hidden");
+}
+
+// Eventos de menú
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("linkTutoriales")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    openTutorialModal();
+  });
+  document.getElementById("linkTutorialesMobile")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    openTutorialModal();
+  });
+});
+
+
 let deferredPrompt = null;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
