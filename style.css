@@ -316,8 +316,8 @@ footer {
 /* PWA Install Popup */
 .install-popup {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  top: 150px;
+  margin: 10px;
   background: var(--nav-bg);
   color: var(--nav-text);
   padding: 15px;
@@ -344,6 +344,7 @@ footer {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  align-items: center;
 }
 
 .install-popup.hidden {
@@ -378,11 +379,11 @@ footer {
   background-color: #1877f2;
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 12px 20px 12px 20px; 
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 15px;
+  margin: 15px !important;
   transition: background-color 0.3s ease;
 }
 
@@ -393,7 +394,8 @@ footer {
 
 /* Boton Descarga Extension Chrome*/
 .btn-voice {
-  margin-top: 10px;
+  margin: 20px 0px 15px !important;
+  
   padding: 10px 16px;
   font-size: 16px;
   background: #555;

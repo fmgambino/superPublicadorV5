@@ -174,7 +174,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
     if (banner && !banner.querySelector("img[data-logo]")) {
       const logo = document.createElement("img");
       logo.setAttribute("data-logo", "");
-      logo.dataset.logoLight = "images/logo-light.png";
+      logo.dataset.logoLight = "images/logo-dark.png";
       logo.dataset.logoDark = "images/logo-dark.png";
       logo.src = document.body.classList.contains("dark-mode")
         ? logo.dataset.logoDark
