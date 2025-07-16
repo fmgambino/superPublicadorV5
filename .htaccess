@@ -1,23 +1,32 @@
-# Activa mod_rewrite
-RewriteEngine On
-RewriteBase /autoposteg/
+# +--------------------------------------------------+
+# | .htaccess para producción en Hostinger          |
+# | Colócalo en la carpeta raíz de autoposteg (o    |
+# | public_html si autoposteg.electronicagambino.com|
+# | apunta directamente ahí).                        |
+# +--------------------------------------------------+
 
-# 1) Redirigir la raíz a /login
+# 1) Activa mod_rewrite
+RewriteEngine On
+
+# 2) Base de las URLs — en producción va en la raíz
+RewriteBase /
+
+# 3) Redirige la raíz (/) a /login
 RewriteRule ^$ login [L,R=302]
 
-# 2) URLs amigables
+# 4) Rutas amigables
 RewriteRule ^login/?$      backend/login.php     [L,QSA]
 RewriteRule ^register/?$   backend/register.php  [L,QSA]
 RewriteRule ^dashboard/?$  backend/dashboard.php [L,QSA]
 
-# 3) Redirecciones 301 de viejas .html
-Redirect 301 /autoposteg/login.html    /autoposteg/login
-Redirect 301 /autoposteg/register.html /autoposteg/register
+# 5) Redirecciones 301 de viejas .html
+RedirectMatch 301 ^/login\.html$    /login
+RedirectMatch 301 ^/register\.html$ /register
 
-# 4) Bloquear SOLO peticiones directas desde el navegador a /backend/*.php
-#    (no bloquea las subrequests internas que hacen las reglas anteriores)
+# 6) Bloquear accesos directos desde el navegador a /backend/*.php
+#    (THE_REQUEST coincide solo en peticiones directas, no en includes internos)
 RewriteCond %{THE_REQUEST} \s/backend/.*\.php [NC]
 RewriteRule ^backend/.*\.php$ - [F]
 
-# 5) Deshabilitar listado de directorios
+# 7) Deshabilitar listado de directorios
 Options -Indexes

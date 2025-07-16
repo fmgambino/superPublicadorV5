@@ -1,6 +1,4 @@
 <?php
-// index.php en la raíz de /autoposteg
-// Redirige automáticamente a /autoposteg/login
-header('Location: /autoposteg/login');
+require __DIR__ . '/backend/config.php';   // si necesitas BASE_PATH
+header('Location: ' . BASE_PATH . '/login');
 exit;
-?>
