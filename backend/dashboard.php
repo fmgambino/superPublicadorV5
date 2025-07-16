@@ -132,11 +132,11 @@ $_SESSION['last_activity'] = time();
       <div class="tutorial-videos">
         <div class="tutorial-item">
           <h3>📌 Tutorial Nº1: Cómo Publicar en tus Grupos de Facebook</h3>
-          <video controls><source src="css/videos/tutorial01_ComoPublicarAutoGrupos.mp4" type="video/mp4"></video>
+          <video controls><source src="assets/videos/tutorial01_ComoPublicarAutoGrupos.mp4" type="video/mp4"></video>
         </div>
         <div class="tutorial-item">
           <h3>🛠️ Tutorial Nº2: Cómo responder automáticamente a los comentarios</h3>
-          <video controls><source src="css/videos/tutorial02_ComoResponderComentarios.mp4" type="video/mp4"></video>
+          <video controls><source src="assets/videos/tutorial02_ComoResponderComentarios.mp4" type="video/mp4"></video>
         </div>
       </div>
     </div>
