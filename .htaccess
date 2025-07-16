@@ -26,6 +26,7 @@ RedirectMatch 301 ^/register\.html$ /register
 # 6) Bloquear accesos directos desde el navegador a /backend/*.php
 #    (THE_REQUEST coincide solo en peticiones directas, no en includes internos)
 RewriteCond %{THE_REQUEST} \s/backend/.*\.php [NC]
+RewriteCond %{THE_REQUEST} \s/backend/(?!logout\.php).*\.php [NC]
 RewriteRule ^backend/.*\.php$ - [F]
 
 # 7) Deshabilitar listado de directorios
