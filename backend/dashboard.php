@@ -1,12 +1,14 @@
 <?php
+// /autoposteg/backend/dashboard.php
 session_start();
+require __DIR__ . '/config.php';
 
 // Duración máxima de inactividad (10 segundos)
 define('MAX_INACTIVITY', 5);
 
 // Validar autenticación
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /autoposteg/login');
+    header('Location: ' . BASE_PATH . '/login');
     exit;
 }
 
@@ -14,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > MAX_INACTIVITY)) {
     session_unset();
     session_destroy();
-    header('Location: /autoposteg/login?error=timeout');
+    header('Location: ' . BASE_PATH . '/login?error=timeout');
     exit;
 }
 
@@ -26,7 +28,7 @@ $_SESSION['last_activity'] = time();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <base href="/autoposteg/" />
+  <base href="<?= BASE_PATH ?>/" />
   <meta name="theme-color" content="#000000" />
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -92,7 +94,7 @@ $_SESSION['last_activity'] = time();
     <div class="controls">
       <button id="langToggle" class="icon-button tooltip" title="Cambiar idioma">🌐<span class="tooltiptext" id="langTooltip">Idioma: Español</span></button>
       <button id="themeToggle" class="icon-button" title="Modo claro/oscuro">☀️</button>
-      <a href="backend/logout.php" class="icon-button" title="Cerrar sesión"><i class="fa fa-sign-out-alt"></i></a>
+      <a href="<?= BASE_PATH ?>/backend/logout.php" class="icon-button" title="Cerrar sesión"><i class="fa fa-sign-out-alt"></i></a>
     </div>
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   </header>

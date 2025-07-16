@@ -1,22 +1,22 @@
 <?php
-// /xampp/htdocs/autoposteg/backend/login.php
+// /autoposteg/backend/login.php
 session_start();
 require __DIR__ . '/config.php';
 
 // Si ya está autenticado, redirige al dashboard
 if (isset($_SESSION['user_id'])) {
-    header('Location: /autoposteg/dashboard');
+    header('Location: ' . BASE_PATH . '/dashboard');
     exit;
 }
 
 $error = $_GET['error'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email    = trim($_POST['email'] ?? '');
+    $email    = trim($_POST['email']    ?? '');
     $password = trim($_POST['password'] ?? '');
 
     if ($email === '' || $password === '') {
-        header('Location: login?error=campos');
+        header('Location: ' . BASE_PATH . '/login?error=campos');
         exit;
     }
 
@@ -32,14 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id']   = $user['id'];
             $_SESSION['user_name'] = $user['first_name'];
             $_SESSION['role']      = $user['subscription_type'];
-            header('Location: /autoposteg/dashboard');
+            header('Location: ' . BASE_PATH . '/dashboard');
             exit;
         } else {
-            header('Location: login?error=invalid');
+            header('Location: ' . BASE_PATH . '/login?error=invalid');
             exit;
         }
     } catch (PDOException $e) {
-        header('Location: login?error=db');
+        header('Location: ' . BASE_PATH . '/login?error=db');
         exit;
     }
 }
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="/autoposteg/">
+  <base href="<?php echo BASE_PATH; ?>/">
   <title data-i18n="login">Iniciar sesión - SuperPublicador</title>
   <link rel="stylesheet" href="assets/css/auth.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <img class="logo" src="images/logo-light.png" alt="Logo">
           <h1 data-i18n="createAccount">¿Nuevo aquí?</h1>
           <p data-i18n="subtitle">Crea una cuenta para comenzar a publicar automáticamente</p>
-          <a href="/autoposteg/register"><button class="ghost" data-i18n="register">Registrarse</button></a>
+          <a href="register"><button class="ghost" data-i18n="register">Registrarse</button></a>
         </div>
       </div>
     </div>
@@ -114,9 +114,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       const pwd = document.getElementById('password');
       const icon = document.getElementById('toggleIcon');
       if (pwd.type === 'password') {
-        pwd.type = 'text'; icon.classList.replace('fa-eye','fa-eye-slash'); this.setAttribute('aria-label','Ocultar contraseña');
+        pwd.type = 'text';
+        icon.classList.replace('fa-eye','fa-eye-slash');
+        this.setAttribute('aria-label','Ocultar contraseña');
       } else {
-        pwd.type = 'password'; icon.classList.replace('fa-eye-slash','fa-eye'); this.setAttribute('aria-label','Mostrar contraseña');
+        pwd.type = 'password';
+        icon.classList.replace('fa-eye-slash','fa-eye');
+        this.setAttribute('aria-label','Mostrar contraseña');
       }
     });
   </script>

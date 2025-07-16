@@ -1,20 +1,19 @@
 <?php
-// /xampp/htdocs/autoposteg/backend/register.php
+// /autoposteg/backend/register.php
 session_start();
 require __DIR__ . '/config.php';
 
 // Si ya está autenticado, redirige al dashboard
 if (isset($_SESSION['user_id'])) {
-    header('Location: /autoposteg/dashboard');
+    header('Location: ' . BASE_PATH . '/dashboard');
     exit;
 }
 
-$error = $_GET['error'] ?? '';
+$error   = $_GET['error']   ?? '';
 $success = isset($_GET['success']);
 
-// Procesar registro solo en POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recoger y sanear
+    // Recopilar y sanear datos
     $first_name = trim($_POST['first_name'] ?? '');
     $last_name  = trim($_POST['last_name']  ?? '');
     $country    = trim($_POST['country']    ?? '');
@@ -23,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email      = trim($_POST['email']      ?? '');
     $password   = trim($_POST['password']   ?? '');
 
-    // Validar campos
+    // Validación básica
     if ($first_name === '' || $last_name === '' || $country === '' || $email === '' || $password === '') {
-        header('Location: /autoposteg/register?error=campos');
+        header('Location: ' . BASE_PATH . '/register?error=campos');
         exit;
     }
 
@@ -34,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
         if ($stmt->fetch()) {
-            header('Location: /autoposteg/register?error=exists');
+            header('Location: ' . BASE_PATH . '/register?error=exists');
             exit;
         }
 
-        // Insertar usuario
+        // Insertar nuevo usuario
         $hashed = password_hash($password, PASSWORD_DEFAULT);
         $insert = $pdo->prepare(
             "INSERT INTO users
@@ -47,21 +46,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
         $insert->execute([$first_name, $last_name, $country, $province, $city, $email, $hashed]);
 
-        header('Location: /autoposteg/login?success=1');
+        header('Location: ' . BASE_PATH . '/login?success=1');
         exit;
     } catch (PDOException $e) {
-        header('Location: /autoposteg/register?error=db');
+        header('Location: ' . BASE_PATH . '/register?error=db');
         exit;
     }
 }
-// Si es GET, mostramos el formulario sin redirigir
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="/autoposteg/">
+  <base href="<?= BASE_PATH ?>/">
   <title data-i18n="register">Registro - SuperPublicador</title>
   <link rel="stylesheet" href="assets/css/auth.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -144,9 +143,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <script src="assets/js/auth.js"></script>
   <script>
     document.getElementById('togglePassword').addEventListener('click', function() {
-      const pwd = document.getElementById('password'); const icon = document.getElementById('toggleIcon');
-      if (pwd.type === 'password') { pwd.type = 'text'; icon.classList.replace('fa-eye','fa-eye-slash'); this.setAttribute('aria-label','Ocultar contraseña'); }
-      else { pwd.type = 'password'; icon.classList.replace('fa-eye-slash','fa-eye'); this.setAttribute('aria-label','Mostrar contraseña'); }
+      const pwd  = document.getElementById('password');
+      const icon = document.getElementById('toggleIcon');
+      if (pwd.type === 'password') {
+        pwd.type = 'text';
+        icon.classList.replace('fa-eye','fa-eye-slash');
+        this.setAttribute('aria-label','Ocultar contraseña');
+      } else {
+        pwd.type = 'password';
+        icon.classList.replace('fa-eye-slash','fa-eye');
+        this.setAttribute('aria-label','Mostrar contraseña');
+      }
     });
   </script>
 </body>

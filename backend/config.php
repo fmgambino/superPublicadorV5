@@ -1,23 +1,38 @@
 <?php
 // /autoposteg/backend/config.php
 
-// Detectar entorno según el host
+// ----------------------
+// 1) Definir BASE_PATH según entorno
+// ----------------------
 $hostName = $_SERVER['HTTP_HOST'] ?? '';
+if (strpos($hostName, 'localhost') !== false || strpos($hostName, '127.0.0.1') !== false) {
+    // Entorno local (XAMPP)
+    define('BASE_PATH', '/autoposteg');
+} else {
+    // Producción (Hostinger)
+    define('BASE_PATH', '');
+}
 
+// ----------------------
+// 2) Configuración de la base de datos
+// ----------------------
 if (strpos($hostName, 'localhost') !== false || strpos($hostName, '127.0.0.1') !== false) {
     // Entorno local (XAMPP)
     $dbHost = '127.0.0.1';
-    $dbName = 'autopost';
+    $dbName = 'autopost';        // Asegúrate de que esta BD exista en tu XAMPP
     $dbUser = 'root';
     $dbPass = '';
 } else {
     // Producción (Hostinger)
     $dbHost = 'localhost';
-    $dbName = 'u197809344_pwa';
+    $dbName = 'u197809344_pwa';  // BD en Hostinger
     $dbUser = 'u197809344_spv5';
     $dbPass = 'jamboree0342$$';
 }
 
+// ----------------------
+// 3) Conexión PDO
+// ----------------------
 try {
     $pdo = new PDO(
         "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4",
@@ -30,6 +45,6 @@ try {
         ]
     );
 } catch (PDOException $e) {
-    // En producción podrías registrar el error en un log
+    // En producción, registra el error en un log en lugar de mostrarlo
     die("Error de conexión a la base de datos: " . $e->getMessage());
 }
