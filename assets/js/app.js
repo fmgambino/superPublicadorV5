@@ -185,8 +185,36 @@ window.addEventListener("beforeinstallprompt", (e) => {
   }
 });
 
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js");
-  });
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/service-worker.js')
+    .then(() => console.log('Service Worker registrado'))
+    .catch(err => console.error('Error registrando SW:', err));
 }
+
+// Detecta si la extensión está instalada (reemplaza EXTENSION_ID por el ID real)
+function detectExtension() {
+  if (window.chrome && chrome.runtime && chrome.runtime.sendMessage) {
+    chrome.runtime.sendMessage(
+      'EXTENSION_ID',
+      { ping: true },
+      response => {
+        // Si arroja error, la extensión no está
+        if (chrome.runtime.lastError) {
+          document.getElementById('extensionModal').classList.remove('hidden');
+        }
+      }
+    );
+  } else {
+    // No es Chrome o sin API: mostramos igualmente
+    document.getElementById('extensionModal').classList.remove('hidden');
+  }
+}
+
+// Función para cerrar el modal
+function closeExtensionModal() {
+  document.getElementById('extensionModal').classList.add('hidden');
+}
+
+// Arrancar detección al cargar la página
+window.addEventListener('load', detectExtension);

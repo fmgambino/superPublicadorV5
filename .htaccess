@@ -1,0 +1,23 @@
+# Activa mod_rewrite
+RewriteEngine On
+RewriteBase /autoposteg/
+
+# 1) Redirigir la raíz a /login
+RewriteRule ^$ login [L,R=302]
+
+# 2) URLs amigables
+RewriteRule ^login/?$      backend/login.php     [L,QSA]
+RewriteRule ^register/?$   backend/register.php  [L,QSA]
+RewriteRule ^dashboard/?$  backend/dashboard.php [L,QSA]
+
+# 3) Redirecciones 301 de viejas .html
+Redirect 301 /autoposteg/login.html    /autoposteg/login
+Redirect 301 /autoposteg/register.html /autoposteg/register
+
+# 4) Bloquear SOLO peticiones directas desde el navegador a /backend/*.php
+#    (no bloquea las subrequests internas que hacen las reglas anteriores)
+RewriteCond %{THE_REQUEST} \s/backend/.*\.php [NC]
+RewriteRule ^backend/.*\.php$ - [F]
+
+# 5) Deshabilitar listado de directorios
+Options -Indexes
