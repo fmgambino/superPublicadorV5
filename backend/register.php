@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="container">
     <div class="form-container sign-up-container">
-      <form action="backend/register.php" method="POST">
+      <form action="/register" method="POST">
         <h1 data-i18n="register">Crear cuenta</h1>
 
         <div class="form-row">
