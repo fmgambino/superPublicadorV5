@@ -27,7 +27,7 @@ if (strpos($hostName, 'localhost') !== false || strpos($hostName, '127.0.0.1') !
     $dbHost = 'localhost';
     $dbName = 'u197809344_pwa';  // BD en Hostinger
     $dbUser = 'u197809344_spv5';
-    $dbPass = 'jamboree0342$$';
+    $dbPass = 'Jamboree0342$$';
 }
 
 // ----------------------
