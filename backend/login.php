@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="container">
     <div class="form-container sign-in-container">
-      <form action="backend/login.php" method="POST">
+      <form action="/login" method="POST">
         <h1 data-i18n="login">Iniciar sesión</h1>
         <input type="email" name="email" placeholder="Correo electrónico" required>
         <div class="password-container">
